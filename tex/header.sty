@@ -1,0 +1,135 @@
+% -------------------------------- Packages requis ------------
+\RequirePackage{ifthen} % Usage de conditionnelles en latexhttps://www.ctan.org/pkg/ifthen
+\RequirePackage{xstring} % Rajoute plein de macros (et certaines conditionnelles) https://www.ctan.org/pkg/xstring
+\RequirePackage{xargs} % Gestion des arguments par défaut  https://ctan.org/pkg/xargs
+
+%===========================Auteur===================================
+%* Sert à définir un auteur ou un encadrant dans un style correct
+%* Usage : \auteur{prénom}{nom}
+\newcommand{\auteur}[2]{#1 \textsc{#2} \\}
+%==============================================================
+
+%=============================gdbdg=================================
+%* Racourci pour mon nom
+\def\gdbdg{\auteur{Guillaume}{de Bigault de Granrut}}
+%==============================================================
+
+%===============================auteurS===============================
+% Définit le bandeau avec les auteurs et les encadrants
+%*Usage : \auteurs{liste des auteurs}[liste des encadrants}[1 si encadrants, 0 sinon][0 si 1 seul auteurs, 1 sinon][0 si mini, 1 sinon]
+% [] 0 par défaut (pas d'encadrants )
+%Remarque :  Il est nécessaire de laisser la deuxième minipage dans la même commande, pour éviter des problèmes de sauts de ligne, et les commentaires seuls sont indispensables
+\newcommandx{\auteurs}[5][3=0,4=0,5 = 0 usedefault]{
+  \noindent
+  \begin{minipage}{0.55\textwidth}
+    \begin{flushleft} \large
+      \IfEq{#4}{1}{\emph{Auteurs :}}{\emph{Auteur :}}\\
+      #1 
+    \end{flushleft}
+  \end{minipage}%  
+ \IfEq{#3}{1}{%
+    \begin{minipage}{0.45\textwidth}
+      \begin{flushright} \large
+        \emph{Encadrants :} \\
+        #2
+        \end{flushright}
+    \end{minipage}
+ }{}
+  \IfEq{#5}{1}{\vfill}{} % Permet de mettre la date en fin de page, doit impérativement être dans la command et pas ailleur, ne fonctionne pas sinon.
+}
+%==============================================================
+
+%===================================Mini title page=====================
+%Usage : \miniTitlePage{Filière}{titre}{sous titre}{auteurs}[1 si sommaire][1 si liste des figures][1 si liste des tableaux]
+\newcommandx{\miniTitlePage}[7][5=1,6=0,7=0, usedefault]{   
+  \thispagestyle{empty} % Supprime le header de cette page    
+%\begin{titlepage}
+        \begin{center}
+            %{\large Intitulé de la filière, domaine ou approfondissement}\
+            {\large #1}\\[0.5cm]
+            % Title
+            \rule{\linewidth}{0.5mm} \\[0.4cm]
+            { \huge \bfseries  #2}\\[0.4cm]
+            {\Large \bfseries #3}
+            \rule{\linewidth}{0.5mm} \\[1.5cm]
+            % Author and supervisor
+            #4 
+
+            % Bottom of the page
+            {\large \today}
+           
+        \end{center}
+        \ifthenelse{#5=1}{\tableofcontents}{}
+        % \begin{appendix}
+          \ifthenelse{#6=1}{\listoffigures}{}
+          \ifthenelse{#7=1}{\listoftables}{}
+        % \end{appendix}
+%         % Permet de ne pas sauter de page si pas de sommaire
+%     %\end{titlepage}
+        \vspace*{0.1cm}
+%         % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
+      
+}
+
+
+
+
+%================================titlePage==============================
+% Permet de créer une vraie page de garde
+%* Usage : \titlePage{image de garde}{insitut/fillière}{titre}{sous titre}{enteteauteurs}[sommaire][liste figures][liste tableaux]
+%* [] : 1 si activé, 0 sinon 
+%* valeur par défaut : 1,0,0 (juste le sommaire)
+\newcommandx{\titlePage}[8][6=1,7=0,8=0, usedefault]{
+    \begin{titlepage}
+        \begin{center}
+        % Inclu l'image en haut de page
+        \includegraphics[width=0.6\textwidth]{#1}\\[1cm]
+        %{\large Intitulé de la filière, domaine ou approfondissement}\
+        {\large #2}\\[0.5cm]
+        
+        % Title
+        \rule{\linewidth}{0.5mm} \\[0.4cm]
+        { \huge \bfseries  #3}\\[0.4cm]
+        {\Large \bfseries #4}
+        \rule{\linewidth}{0.5mm} \\[1.5cm]
+        % Author and supervisor
+        #5 
+        
+        % Bottom of the page
+        {\large \today}
+        \end{center}
+        \end{titlepage}
+        \vspace*{0.1cm}
+        % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
+        \ifthenelse{#6=1}{\tableofcontents}{}
+        
+          \ifthenelse{#7=1}{\listoffigures}{}
+          \ifthenelse{#8=1}{\listoftables}{}
+ 
+        % Permet de ne pas sauter de page si pas de sommaire
+        \IfEq{\number\numexpr #6 + #7 + #8 }{0}{}{\newpage}
+}
+%==============================================================
+
+
+
+%!------------------------------------- Header ----------------
+%======================================header========================
+
+%usage : \header[logo]{Titre}{nom}{prénom}
+\newcommand{\header}[4][images/Logo_ENSIMAG.png]{
+%* ------------------------------ En-tête de pied de page (via fanchdr)------------------------------ %
+%https://tex.stackexchange.com/questions/358329/why-is-rightmark-not-appearing-in-header : pourquoi \rightmark déconne
+\pagestyle{fancy} % Utilise le package fancyhdr, change le style de page pour utiliser celui de fancyheader, et activer les header
+
+% Header sup
+\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[C]{#2\\}
+\fancyhead[R]{ #3\\#4}
+\renewcommand{\headrulewidth}{1pt} % épaisseur du trait du header supérieur
+% Header inf
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+\fancyfoot[L]{\includegraphics[width=1cm]{#1}}
+\renewcommand{\footrulewidth}{1pt} % épaisseur du trait du header inférieur
+}
+%==============================================================

@@ -1,0 +1,72 @@
+%* ------------------------------ Fonctions personnalisées ------------------------------ %
+%!Raccourcis en vrac
+\def\BB{$\bullet$}
+\def\cqfd{$\blacksquare$}
+\def\ds{\displaystyle}
+\def\t{\texttt}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+%! Les Lettres de base
+\def\N{\mathbb{N}}
+\def\P{\mathbb{P}}
+\def\E{\mathbb{E}}
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\B{\mathbb{B}}
+\def\D{\mathbb{D}}
+\def\Q{\mathbb{Q}}
+\def\K{\mathbb{K}}
+\def\Z{\mathbb{Z}}
+\def\DD{\mathcal{D}}
+\def\EE{\mathcal{E}}
+\def\CC{\mathcal{C}}
+\def\MM{\mathcal{M}}
+\def\LL{\mathcal{L}}
+\def\II{\mathcal{I}}
+\def\H{\mathcal{H}}
+\def\d{\mathrm{d}}
+%! opérateurs 
+\newcommand{\laplacian}[1]{\Delta #1 } % Laplacian
+\def\ssi{\Leftrightarrow} % ssi
+\def\alors{\Rightarrow} % 
+\def\Tan{\operatorname{Tan}} 
+\def\Arctan{\operatorname{Arctan}}
+\def\Arcsin{\operatorname{Arcsin}}
+\def\Arccos{\operatorname{Arccos}}
+\def\indi{\mbox{l\hspace{-0.55em}1}} %TODO TO test
+\def\Re{\operatorname{Re}} %? Tester
+\def\v{\overrightarrow}
+\def\rond{\circ\,}
+\def\limit{\lim\limits}
+\def\u{\underline}
+\def\divides{\,|\,}
+\def\b{\overline} %?
+\newcommand{\tendvers}[1]{\xrightarrow[#1] {\,\,}} 
+\renewcommand\epsilon{\varepsilon}
+\renewcommand\phi{\varphi}
+\renewcommand\leq{\leqslant}
+\renewcommand\geq{\geqslant}
+\newcommand{\modulo}[2]{\equiv #1 \,\,\, [#2]}% ? Tester
+%!Ensembles algèbre
+\def\Ker{\operatorname{Ker}}
+\def\Im{\operatorname{Im}}
+\def\Vect{\operatorname{Vect}}
+\def\Card{\operatorname{Card}}
+\def\deg{\operatorname{deg}}
+\def\rg{\operatorname{rg}}
+\def\id{\operatorname{id}} % indicatrice
+
+%equations
+\newenvironment{eq}
+{\begin{equation*} \begin{aligned}}
+{\end{aligned} \end{equation*}}
+
+%! Compteur de questions
+%? To set correclty with the section counter
+\newcounter{question}
+\newenvironment{question}{\stepcounter{question}{\noindent\bfseries Question \thequestion\ :}}{} 
+
+\newcommand{\qu}[1][]{\begin{question}
+    #1
+\end{question}}
+
+\def\line{\begin{center}\rule{0.5 \textwidth}{0.5pt}\end{center}} %?

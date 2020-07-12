@@ -1,0 +1,47 @@
+% define some parameters for the \latex files.
+
+% ============================ Paramétrages divers=======================
+
+%* Paramètres de matrices du TP de MNB foireux mais qui marchent, permet de redefinir les espacements entre coeffs, utile pour matrices enormes
+
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+%*paramétrage de lstlisting 
+%TODO (to try)
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+  }
+  \lstset{escapechar=@,style=customc}
+
+  %* -------------- Paramètres de mise en page  (via layout) ------------ %
+%\pagestyle{fancy}
+
+\renewcommand{\thesection}{\Roman{section}}
+%\renewcommand{\sectionmark}[1]%
+%{\markright{\MakeUppercase{\thesection.\ #1}}}
+\oddsidemargin -14pt
+\evensidemargin -14pt
+\textwidth 17cm
+\textheight 22cm
+\setlength{\parskip}{0.6em}
+\setlength{\footskip}{40 pt}
+%*-------------------------------- Paramètres du sommaire (via tocloft)
+\cftsetindents{section}{1em}{2.5em}
+\cftsetindents{subsection}{4.5em}{2.5em}

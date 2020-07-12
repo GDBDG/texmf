@@ -1,0 +1,68 @@
+%------------------Options des couleurs
+
+%pas de couleur (par défaut)
+\definecolor{ColorSection}{rgb}{0,0,0}
+\definecolor{ColorSubSection}{rgb}{0,0,0}
+%
+
+% option : colorised  (merci Tugdual pour les couleurs)
+\DeclareOption{colorised}{
+  \definecolor{ColorSection}{rgb}{.204,.353,.541}
+  \definecolor{ColorSubSection}{rgb}{.31,.506,.741}
+}
+
+
+%------------------Options de mise en page
+%* if no option
+\titleformat{\section}
+  {\bfseries\Large\color{ColorSection}}
+  {\arabic{section}}
+  {0.4em}
+  {\underline}
+
+\titleformat{\subsection}
+  {\bfseries\large\color{ColorSubSection}}
+  {\hspace{1em}\arabic{subsection}}
+  {0.5em}
+  {\underline}
+
+\titleformat{\subsubsection}
+  {\bfseries\color{ColorSubSection}}
+  {\hspace{2.5em} \alph{subsubsection})}
+  {0.5em}
+  {\dashuline}
+
+%* option : devie (style chargé, inspiré de mes cours de spé)
+\DeclareOption{devie}{
+  \titleformat{\section}
+    {\bfseries\Large\scshape\color{ColorSection}}
+    {\fbox{\fbox{\Roman{section}.}} -}
+    {0.4em}
+    {\uuline}
+
+  \titleformat{\subsection}
+    {\bfseries\large\color{ColorSubSection}}
+    {\hspace{1em} \fbox{\arabic{subsection}.}}
+    {0.5em}
+    {\underline}
+}
+% Fin option devie
+
+%* option : sobre (style plus léger, avec chiffre romains pour les sections)
+\DeclareOption{sobre}{
+  \titleformat{\section}
+    {\bfseries\Large\scshape\color{ColorSection}}
+    {\Roman{section}. -}
+    {0.5em}
+    {\underline }
+
+  \titleformat{\subsection}
+    {\bfseries\large\color{ColorSubSection}}
+    {\hspace{1em} \arabic{subsection}.}
+    {0.5em}
+    {\underline}
+  
+}% Fin sobre
+%* Indispensable
+\ProcessOptions\relax
+\pgfplotsset{compat=1.16}

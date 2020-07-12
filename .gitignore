@@ -1,0 +1,14 @@
+# The LaTeX files
+*.aux
+*.fdb_latexmk
+*.fls 
+*.log 
+*.out
+*.synctex.gz 
+*.toc
+
+# Mac os files
+.DS_Store
+
+# vscode files
+*/.vscode/*

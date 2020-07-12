@@ -1,0 +1,77 @@
+\documentclass{minimal} 
+
+\usepackage{tikz} 
+\usetikzlibrary{matrix} 
+\usetikzlibrary{calc}
+\usetikzlibrary{fit} 
+
+\begin{document} 
+
+\begin{tikzpicture} 
+
+\newcommand{\myunit}{0.8 cm}
+\tikzset{
+    node style ge/.style={circle,minimum size=\myunit},
+    >=latex,
+}
+
+% Dessiner les matrices 
+
+\matrix (A) [matrix of math nodes,%
+             nodes = {anchor=base,node style ge},%
+             left delimiter  = (,%
+             right delimiter = )] at (0,0)
+{%
+  a_{1,1} & \ldots & a_{1,k} & \ldots & a_{1,p}  \\
+  \vdots & & \vdots && \vdots  \\
+  a_{i,1} & \ldots & a_{i,k} & \ldots & a_{i,p}  \\
+  \vdots & & \vdots && \vdots  \\
+  a_{n,1} & \ldots & a_{n,k} & \ldots & a_{n,p}  \\
+};
+\matrix (C) [right,matrix of math nodes,%
+             nodes = {anchor=base,node style ge},%
+             left delimiter  = (,%
+             right delimiter = )] at ($(A.east)+(2,0)$)
+{%
+  c_{1,1} & \ldots & c_{1,j} & \ldots & c_{1,q}  \\
+  \vdots & & \vdots && \vdots  \\
+  c_{i,1} & \ldots & c_{i,j} & \ldots & c_{i,q}  \\
+  \vdots & & \vdots && \vdots  \\
+  c_{n,1} & \ldots & c_{n,j} & \ldots & c_{n,q}  \\
+};
+\matrix (B) [above,matrix of math nodes,%
+             nodes = {anchor=base,node style ge},%
+             left delimiter  = (,%
+             right delimiter = )] at ($(C.north)+(0,2)$)
+{%
+  b_{1,1} & \ldots & b_{1,j} & \ldots & b_{1,q}  \\
+  \vdots & & \vdots && \vdots  \\
+  b_{k,1} & \ldots & b_{k,j} & \ldots & b_{k,q}  \\
+  \vdots & & \vdots && \vdots  \\
+  b_{n,1} & \ldots & b_{n,j} & \ldots & b_{n,q}  \\
+};
+
+% FlËches autour des matrices 
+\draw [<->] ($(A.north west) + (-0.5,0)$) to node[left] {$n$}  ($(A.south west) + (-.5,0)$); 
+\draw [<->] ($(A.north west) + (0,0.5)$) to node[above] {$p$}  ($(A.north east) + (0,.5)$); 
+\draw [<->] ($(B.north west) + (-0.5,0)$) to node[left] {$p$}  ($(B.south west) + (-.5,0)$); 
+\draw [<->] ($(B.north west) + (0,0.5)$) to node[above] {$q$}  ($(B.north east) + (0,.5)$); 
+
+% Dessiner les 3 boites de couleur. 
+\node [draw, thick,rounded corners, red,fit=(A-3-1.south west) (A-3-5.north east),inner sep=0pt] (boxa) {}  ; 
+\node [draw, thick,rounded corners, green,fit=(B-1-3.north west) (B-5-3.south east),inner sep=0pt] (boxb) {}  ; 
+\node [draw, thick,rounded corners, blue,fit=(C-3-3.north west) (C-3-3.south east),inner sep=0pt] (boxc) {}  ; 
+
+% Relier les boites.
+\draw [red,->,very thick] (boxa) -- (boxc) ; 
+\draw [green,->,very thick] (boxb) -- (boxc) ; 
+
+% Les flËches de ligne / colonne
+\path (C-3-3) -| coordinate(temp)  (C.east) ; 
+\draw [<-,very thick] ($(temp)+(0.5,0)$) to ++(1,0)node [right] {ligne $i$}  ;
+\path (C-3-3) |- coordinate(temp)  (C.south) ; 
+\draw [<-,very thick] ($(temp)+(0,-0.3)$) to ++(0,-1)node [below] {colonne $j$}  ;
+
+
+\end{tikzpicture} 
+\end{document}
