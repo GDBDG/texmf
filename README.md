@@ -62,7 +62,7 @@ All of these commands are provided by the package ```header.sty```.
 ## The package utilitaire.sty
 Contains a lot of usefull commands, like the operators in maths,... You should take a look,, the name are quit explicit, and the commands not very complicated to understand.
 However, I signal one that is very usefull for me : 
-* the environement ```eq``` : a combination of ```equation*``` and ```aligned*```environements, usefull for maths equations.
+* the environement ```eq``` : a combination of ```equation*``` and ```aligned```environements, usefull for maths equations.
 
 ***
 ## The cls part.
