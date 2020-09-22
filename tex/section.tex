@@ -4,6 +4,7 @@
 \definecolor{ColorSection}{rgb}{0,0,0}
 \definecolor{ColorSubSection}{rgb}{0,0,0}
 %
+\renewcommand{\thesection}{\Alph{section}}
 
 % option : colorised  (merci Tugdual pour les couleurs)
 \DeclareOption{colorised}{
@@ -16,7 +17,7 @@
 %* if no option
 \titleformat{\section}
   {\bfseries\Large\color{ColorSection}}
-  {\arabic{section}}
+  {\Alph{section}}
   {0.4em}
   {\underline}
 
@@ -34,6 +35,7 @@
 
 %* option : devie (style chargé, inspiré de mes cours de spé)
 \DeclareOption{devie}{
+  \renewcommand{\thesection}{\Roman{section}}
   \titleformat{\section}
     {\bfseries\Large\scshape\color{ColorSection}}
     {\fbox{\fbox{\Roman{section}.}} -}
@@ -50,6 +52,7 @@
 
 %* option : sobre (style plus léger, avec chiffre romains pour les sections)
 \DeclareOption{sobre}{
+  \renewcommand{\thesection}{\Roman{section}}
   \titleformat{\section}
     {\bfseries\Large\scshape\color{ColorSection}}
     {\Roman{section}. -}

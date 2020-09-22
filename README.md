@@ -33,7 +33,7 @@ This package provide a few commands, necessary in order to set a document correc
 * ```\enteteAuteurs``` : contains \autheurs data, cf the template, should be use only if there are supersivors, else use ```\listAuteurs``` instead.
 * ```\header```: define the header for all the pages.
   * ```#1``` : image left below (logo of your school/compagny), optional (defalut value defined in ```tex/header.sty```. )
-  * ```#2`` : the middle title
+  * ```#2``` : the middle title, CAN'T stay empty, or leads to error : ```! LaTeX Error: There's no line here to end.```
   * ```#3``` : last name (first line up right)
   * ```#4``` : fisrt name (second line right).
 
@@ -73,3 +73,18 @@ This cls provide:
 * some parameters for the document : in ```parametres.tex```. I do not give an exhaustive list of them, because if you need to change them (and able to do it), you should be able to understand the file itself.
 * options for the section appearence : this class provide 3 options for the apparence of the sections names. It is all specified in ```tex/section.tex```. Unless you want to add a setting, or modify the settings, you don't need to understand this file, and in that case, the file is enought explicit.
   
+***
+## The different extensions
+* .aux : contains data for cross references (for LaTeX and BibTeX)
+* .bbl : produced by BibTeX, used by LaTeX for the next compilation (contains bibliographie sources)
+* .blg : BibTeX logs
+* .bst : for BibTeX
+* .brf : for back references (I don't know what it is)
+* .dtx : documented source file, generate latex package
+* .fdb_latexmk
+* fls
+* log
+* lof : list of figure
+* out 
+* toc : for the table of content
+* synctex.gz

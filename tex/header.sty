@@ -1,7 +1,8 @@
-% -------------------------------- Packages requis ------------
-\RequirePackage{ifthen} % Usage de conditionnelles en latexhttps://www.ctan.org/pkg/ifthen
+% ---------------------------------------- Packages requis -------------------------------------------------------------
+\RequirePackage{ifthen} % Usage de conditionnelles en latex https://www.ctan.org/pkg/ifthen
 \RequirePackage{xstring} % Rajoute plein de macros (et certaines conditionnelles) https://www.ctan.org/pkg/xstring
-\RequirePackage{xargs} % Gestion des arguments par défaut  https://ctan.org/pkg/xargs
+\RequirePackage{xargs}
+\RequirePackage{graphicx} % Gestion des arguments par défaut https://ctan.org/pkg/xargs
 
 %===========================Auteur===================================
 %* Sert à définir un auteur ou un encadrant dans un style correct
@@ -11,14 +12,14 @@
 
 %=============================gdbdg=================================
 %* Racourci pour mon nom
-\def\gdbdg{\auteur{Guillaume}{de Bigault de Granrut}}
+\newcommand{\gdbdg}{\auteur{Guillaume}{de Bigault de Granrut}}
 %==============================================================
 
 %===============================auteurS===============================
 % Définit le bandeau avec les auteurs et les encadrants
 %*Usage : \auteurs{liste des auteurs}[liste des encadrants}[1 si encadrants, 0 sinon][0 si 1 seul auteurs, 1 sinon][0 si mini, 1 sinon]
 % [] 0 par défaut (pas d'encadrants )
-%Remarque :  Il est nécessaire de laisser la deuxième minipage dans la même commande, pour éviter des problèmes de sauts de ligne, et les commentaires seuls sont indispensables
+%Remarque : Il est nécessaire de laisser la deuxième minipage dans la même commande, pour éviter des problèmes de sauts de ligne, et les commentaires seuls sont indispensables
 \newcommandx{\auteurs}[5][3=0,4=0,5 = 0 usedefault]{
   \noindent
   \begin{minipage}{0.55\textwidth}
@@ -64,8 +65,8 @@
           \ifthenelse{#6=1}{\listoffigures}{}
           \ifthenelse{#7=1}{\listoftables}{}
         % \end{appendix}
-%         % Permet de ne pas sauter de page si pas de sommaire
-%     %\end{titlepage}
+        % Permet de ne pas sauter de page si pas de sommaire
+    %\end{titlepage}
         \vspace*{0.1cm}
 %         % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
       
@@ -81,47 +82,92 @@
 %* valeur par défaut : 1,0,0 (juste le sommaire)
 \newcommandx{\titlePage}[8][6=1,7=0,8=0, usedefault]{
     \begin{titlepage}
-        \begin{center}
+      \begin{center}
         % Inclu l'image en haut de page
         \includegraphics[width=0.6\textwidth]{#1}\\[1cm]
         %{\large Intitulé de la filière, domaine ou approfondissement}\
         {\large #2}\\[0.5cm]
-        
         % Title
         \rule{\linewidth}{0.5mm} \\[0.4cm]
-        { \huge \bfseries  #3}\\[0.4cm]
+        { \huge \bfseries #3}\\[0.4cm]
         {\Large \bfseries #4}
         \rule{\linewidth}{0.5mm} \\[1.5cm]
         % Author and supervisor
         #5 
-        
         % Bottom of the page
         {\large \today}
-        \end{center}
-        \end{titlepage}
-        \vspace*{0.1cm}
-        % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
-        \ifthenelse{#6=1}{\tableofcontents}{}
-        
-          \ifthenelse{#7=1}{\listoffigures}{}
-          \ifthenelse{#8=1}{\listoftables}{}
- 
-        % Permet de ne pas sauter de page si pas de sommaire
-        \IfEq{\number\numexpr #6 + #7 + #8 }{0}{}{\newpage}
+      \end{center}
+    \end{titlepage}
+    \vspace*{0.1cm}
+    % % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
+    \ifthenelse{#6=1}{\tableofcontents}{}
+    \ifthenelse{#7=1}{\listoffigures}{}
+    \ifthenelse{#8=1}{\listoftables}{}
+    % % Permet de ne pas sauter de page si pas de sommaire
+    \IfEq{\number\numexpr #6 + #7 + #8 }{0}{}{\newpage}
 }
 %==============================================================
 
+%==================================== Title page imag================
+%* Usage : \titlePage{image de garde}{image2}{insitut/fillière}{titre}{sous titre}{enteteauteurs}[sommaire][liste figures][liste tableaux]
+\newcommandx{\titlePageImag}[9][7=0,8=0,9=0, usedefault]{
+    \begin{titlepage}
+      \begin{center}
+        \makebox[\textwidth][l]{
+          \raisebox{-8pt}[0pt][0pt]{
+          \includegraphics[scale=0.1]{#1}
+          }
+          }
+          \makebox[\textwidth][r]{
+          \raisebox{0pt}[0pt][0pt]{
+          \includegraphics[scale=0.1]{#2}
+          }
+          }
+          #3\\
+        \vspace{3cm}
+        {\LARGE #5}\\
+        \vspace{1cm}
+        Effectué chez Serpico\\
+        \vspace{2cm}
+        \shadowbox{
+        \begin{minipage}{0.95\textwidth}
+          \begin{center}
+            {\Huge #4}\\
+          \end{center}
+        \end{minipage}
+        }\\
+        \vspace{3cm}
+        % Bottom of the page
+        #6
+        {\large \today}
+        \vspace{4cm}
+        \vfill
+        \begin{tabular}{p{10cm}p{10cm}}
+          \textbf{Entreprise :} Serpico & \textbf{Responsable de stage : } \\
+          {\footnotesize 59 Boulevard Royal, Luxembourg, L 2449}  & ~~~Guillaume \textsc{chatelain}\\
+          {\footnotesize BP XX}          & {\bf Tuteur de l'école}\\
+          {\footnotesize 38000 Grenoble Cedex}  & ~~~Nom et PrénomTuteur Ecole\\
+        \end{tabular}
+      \end{center}
+    \end{titlepage}
+    \vspace*{0.1cm}
+    % % Insertion du sommaire, et autres, penser à compiler DEUX fois (dépend de l'éditeur)
+    \ifthenelse{#7=1}{\tableofcontents}{}
+    \ifthenelse{#8=1}{\listoffigures}{}
+    \ifthenelse{#9=1}{\listoftables}{}
+    % % Permet de ne pas sauter de page si pas de sommaire
+    \IfEq{\number\numexpr #7 + #8 + #9 }{0}{}{\newpage}
+}
 
 
 %!------------------------------------- Header ----------------
 %======================================header========================
 
-%usage : \header[logo]{Titre}{nom}{prénom}
-\newcommand{\header}[4][images/Logo_ENSIMAG.png]{
+%usage : \header[logo left]{Titre}{nom}{prénom}[logo right]
+\newcommandx{\header}[5][1=null,5=null, usedefault]{
 %* ------------------------------ En-tête de pied de page (via fanchdr)------------------------------ %
 %https://tex.stackexchange.com/questions/358329/why-is-rightmark-not-appearing-in-header : pourquoi \rightmark déconne
 \pagestyle{fancy} % Utilise le package fancyhdr, change le style de page pour utiliser celui de fancyheader, et activer les header
-
 % Header sup
 \fancyhead[L]{\nouppercase{\rightmark}}
 \fancyhead[C]{#2\\}
@@ -129,7 +175,12 @@
 \renewcommand{\headrulewidth}{1pt} % épaisseur du trait du header supérieur
 % Header inf
 \fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+\ifthenelse{\equal{#1}{null}}{}{
 \fancyfoot[L]{\includegraphics[width=1cm]{#1}}
+}
+\ifthenelse{\equal{#5}{null}}{}{
+  \fancyfoot[R]{\includegraphics[width=1cm]{#5}}
+}
 \renewcommand{\footrulewidth}{1pt} % épaisseur du trait du header inférieur
 }
 %==============================================================
