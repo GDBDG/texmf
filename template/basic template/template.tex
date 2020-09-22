@@ -4,19 +4,6 @@
 \def\listAuteurs
     {\gdbdg} % authors, with \auteur
 
-%*  List of the supervisors, for the cover page
-\def\listEncadrants
-    {\auteur{Prenom Encadrant}{nom Encadrant}} % Supervisor, with \auteur
-
-%* Defines the part with the authors and framers of the cover page, used by \miniTitlePage and \titlePage
-\def\enteteAuteurs
-    {\auteurs
-        {\listAuteurs} % list of the authors
-        {\listEncadrants} % list of the supervisors
-        []  % 1 if supervisors, 0 else (default 0)
-        []  % 1 if only one author, 0 else (default 0)
-        []} % 1 if full page, 0 if mini page, (def 0) 
-
 %* Header
 \header
     [images/Logo_ENSIMAG.png]% image left below

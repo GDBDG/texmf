@@ -16,7 +16,7 @@ If you need to change this options, you can, in the ```tex/template.cls``` file.
 
 It provide several options (for now, change only the appearance of the sections title):
 * ```colorised``` : add colors to the title (if not, the titles remains black, like the rest of the document)
-* ```sobre``` and ```devie``` : two appearances for the titles (don't use both). (some problems, with the devie option, I recommand the sobre option). It will work without option, but I recommand to use one.
+* ```sobre``` and ```devie``` : two appearances for the titles (don't use both). (some problems, with the devie option, I recommand the sobre option). Without option, the section titles will have Arabic counter instead of Roman counters.
 
 ***
 ## The package header.sty
@@ -24,7 +24,7 @@ This package provide a few commands, necessary in order to set a document correc
 * ```\auteur{first name}{last name}``` : equivalent to ```first name \textsc{last name}```. It's defined in ```tex/header.sty```. 
 * ```\listAuteurs``` : contains all the authors of the document (must be initialised), the differents authors must be separated only with a ```space```caracter, the ```auteur``` manage the indentation.
 * ```\listEncadrants```: same principe as \listAuteurs, but for the supervisor.
-* ```\auteurs```: define the author part ine the main page. Take several arguments : 
+* ```\auteurs``` (DEPRECATED): define the author part ine the main page. Take several arguments : 
   * ```#1``` : contains the list of the authors
   * ```#2``` : contains the list of the supervisors
   * ```#3``` : 1 if supervisors, 0 else (default 0)
@@ -55,7 +55,16 @@ This package provide a few commands, necessary in order to set a document correc
   * ```#6``` : 1 if table of content, 0 else. (default 1)
   * ```#7``` : 1 if list of figures, 0 else. (default 0)
   * ```#8``` : 1 if list of tables, 0 else. (default 0)
-
+* ```\titlePageImag```: Provide a full title page (the one provided by ENSIMAG, but with a correct encoding)
+  * ```#1``` : left logo 
+  * ```#2``` : right logo
+  * ```#3``` : fieled of study
+  * ```#4``` : title
+  * ```#5``` : subtitle 
+  * ```#6``` : authors, defined with  ```\listAuteurs``` or ```\enteteAuteurs```.
+  * ```#7``` : 1 if table of content, 0 else. (default 1)
+  * ```#8``` : 1 if list of figures, 0 else. (default 0)
+  * ```#9``` : 1 if list of tables, 0 else. (default 0)
 All of these commands are provided by the package ```header.sty```.
 ***
 
