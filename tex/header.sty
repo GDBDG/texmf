@@ -20,15 +20,15 @@
 %*Usage : \auteurs{liste des auteurs}[liste des encadrants}[1 si encadrants, 0 sinon][0 si 1 seul auteurs, 1 sinon][0 si mini, 1 sinon]
 % [] 0 par défaut (pas d'encadrants )
 %Remarque : Il est nécessaire de laisser la deuxième minipage dans la même commande, pour éviter des problèmes de sauts de ligne, et les commentaires seuls sont indispensables
-%DEPRECATED : 
+%DEPRECATED :
 \newcommandx{\auteurs}[5][3=0,4=0,5 = 0 usedefault]{
   \noindent
   \begin{minipage}{0.55\textwidth}
     \begin{flushleft} \large
       \IfEq{#4}{1}{\emph{Auteurs :}}{\emph{Auteur :}}\\
-      #1 
+      #1
     \end{flushleft}
-  \end{minipage}%  
+  \end{minipage}%
  \IfEq{#3}{1}{%
     \begin{minipage}{0.45\textwidth}
       \begin{flushright} \large
@@ -43,8 +43,8 @@
 
 %===================================Mini title page=====================
 %Usage : \miniTitlePage{Filière}{titre}{sous titre}{auteurs}[1 si sommaire][1 si liste des figures][1 si liste des tableaux]
-\newcommandx{\miniTitlePage}[7][5=1,6=0,7=0, usedefault]{   
-  \thispagestyle{empty} % Supprime le header de cette page    
+\newcommandx{\miniTitlePage}[7][5=1,6=0,7=0, usedefault]{
+  \thispagestyle{empty} % Supprime le header de cette page
 %\begin{titlepage}
         \begin{center}
             %{\large Intitulé de la filière, domaine ou approfondissement}\
@@ -147,7 +147,7 @@
           \textbf{Entreprise :} Serpico & \textbf{Responsable de stage : } \\
           {\footnotesize 59 Boulevard Royal, Luxembourg, L 2449}  & ~~~Guillaume \textsc{chatelain}\\
           {\footnotesize BP XX}          & {\bf Tuteur de l'école}\\
-          {\footnotesize 38000 Grenoble Cedex}  & ~~~Nom et PrénomTuteur Ecole\\
+          {\footnotesize 38000 Grenoble Cedex}  & ~~~\auteur{Olivier}{Muller}\\
         \end{tabular}
       \end{center}
     \end{titlepage}
