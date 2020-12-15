@@ -5,10 +5,6 @@
 \ProvidesClass{cv}[2015/02/28 CV class]
 \LoadClass{article}
 \NeedsTeXFormat{LaTeX2e}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%PACKAGES%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \input{packagesCV.tex}
 \def\BB{$\bullet$}
 
@@ -173,24 +169,24 @@
 
 \ifthenelse{\equal{\givenprofilepic}{}}{}{\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
     \clip (600/2, 567/2) circle (567/2);
-
-        \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\givenprofilepic}};
+        \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (-60,0) {\includegraphics[width=6.2cm]{\givenprofilepic}};
 \end{tikzpicture}}
 
-{\Large\color{mainblue}\givencvname}
+{\fontsize{17}{17}\selectfont\color{mainblue}\givencvname}
 
 \begin{flushright}
 {\Large\color{black!80}\givencvjobtitle}
 \end{flushright}
-\renewcommand{\arraystretch}{1.6}
-\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
+\renewcommand{\arraystretch}{2}
+\setcellgapes{20pt}
+\begin{tabular}{p{0.5cm} @{\hskip 0.6cm}p{5cm}}
 \ifthenelse{\equal{\givencvdate}{}}{}{{\large\icon{\faBirthdayCake}} & \givencvdate\\}
 \ifthenelse{\equal{\givencvnationnality}{}}{}{{\large\icon{\faGlobe}} & \givencvnationnality\\}
 \ifthenelse{\equal{\givennumberphone}{}}{}{{\large\icon{\faPhone}} & \givennumberphone\\}
 \ifthenelse{\equal{\givencvsite}{}}{}{{\large\icon{\Mundus}} & \href{\givencvsite}{\textcolor{cerulean}\givencvsite}\\}
 \ifthenelse{\equal{\givencvmail}{}}{}{{\large\icon{\faEnvelopeO}} & \href{mailto:\givencvmail}{\givencvmail}\\}
 \ifthenelse{\equal{\givenadress}{}}{}{{\large\icon{\faMapMarker}} & \givenadress\\}
-& 38000, Grenoble\\ & France\\
+& 38000, Grenoble, France\\
 \ifthenelse{\equal{\givenpermisB}{false}}{}{{\large\icon{\faCar}}& Permis B\\}
 \end{tabular}
 
@@ -225,7 +221,7 @@
       \ifcase\value{colorCounter}%
         mainblue\or%
         mainblue\or%
-        maingray\or%
+        mainblue\or%
         maingray\else%
         maingray\fi%
     }%
@@ -266,13 +262,13 @@
 \pagestyle{empty}
 
 % List de hipster cv
-\newcommand{\cvevent}[6]{\raggedleft #1  \hspace*{0.5em}&\hspace*{0.5em}\textbf{#2}\newline  \hspace*{0.5em}\textsc{#3} $\cdot$ {#4 \textcolor{lightgray}{\faMapMarker}}\newline  \hspace*{0.5em}{\color{black!70}\footnotesize #5}\vspace{1.5em} & \raisebox{-0.7\height}{\includegraphics[height=1cm]{#6}}}
-
+\newcommand{\cvevent}[6]{\raggedleft #1 &\textbf{#2}\newline  \textsc{#3} $\cdot$ {#4 \textcolor{lightgray}{\faMapMarker}}\newline{\color{black!70}\footnotesize #5}\vspace{1.5em} & \raisebox{-0.7\height}{\includegraphics[height=1cm]{#6}}}
+\newcommand{\cvprojet}[3]{\raggedleft #1 &\textbf{#2}\newline {\color{black!70}\footnotesize #3}\vspace{1.5em} & }
 %%%%%%%%%%%%%%%%%%%%
 % List twenty environment %
 %%%%%%%%%%%%%%%%%%%%
 
-\setlength{\tabcolsep}{0pt}
+% \setlength{\tabcolsep}{0pt}
 \newenvironment{twenty}{%
   
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
@@ -288,7 +284,7 @@
     #4\vspace{\parsep}%
   }\\}
 
-\setlength{\tabcolsep}{0pt}
+% \setlength{\tabcolsep}{0pt}
 \newenvironment{twentyicon}{%
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
 }{%
