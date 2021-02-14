@@ -97,6 +97,7 @@ You can set 0, 1, or 2 of this values, and it will show : no image, one image in
 * \sethidden{#1} ```#1``` : this cls gives 2 options : 
   * #1 = 1 : all the unsetted fields are hidden (if not needed for instance)
   * #1 = 0 : show the unsetted fields with their expected value in red, and additionnal content in normal color (ex : "Encadrant"), default value : not hidden
+  Must be called BEFORE all the setters, or it will overwrite the content (I will provide a fix)
 
 * \booltoc{1} ```#1``` : boolean for table of content
 * \booltof{1} ```#1``` : boolean for table of figures

@@ -61,12 +61,12 @@
         \renewcommand{\givenentreprise}{\white{s}}
         \renewcommand{\givenfilliere}{\white{s}}
         \renewcommand{\givenperiode}{\white{s}}
-        \renewcommand{\givenrespostage}{\white{s}}
+        \renewcommand{\givenrespostage}{undef}
         \renewcommand{\givenschool}{\white{s}}
         \renewcommand{\givenschoolbis}{\white{s}}
         \renewcommand{\givensoutitre}{\white{s}}
         \renewcommand{\giventitre}{\red{Titre}}
-        \renewcommand{\giventuteurstage}{\white{s}}
+        \renewcommand{\giventuteurstage}{undef}
         \renewcommand{\givenvilleentreprise}{\white{s}}
     }{
         \renewcommand{\givenaddrentreprise}{\red{rue entreprise}}
@@ -154,11 +154,11 @@
         % Informations tuteurs
         \begin{minipage}{0.47\textwidth}
             \begin{flushright}
-                \IfEq{\hidden}{1}{}{
+                \IfEq{\givenrespostage}{undef}{}{
                     \textbf{Encadrant} \\
                     \givenrespostage\\
                 }
-                \IfEq{\hidden}{1}{}{
+                \IfEq{\giventuteurstage}{undef}{}{
                     \textbf{Tuteur académique} \\
                     \giventuteurstage\\
                 }
