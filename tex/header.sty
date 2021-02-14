@@ -107,6 +107,7 @@
 %==============================================================
 
 %==================================== Title page imag================
+%DEPRECATED
 %* Usage : \titlePage{image de garde}{image2}{insitut/fillière}{titre}{sous titre}{enteteauteurs}[sommaire][liste figures][liste tableaux]
 \newcommandx{\titlePageImag}[9][7=0,8=0,9=0, usedefault]{
     \begin{titlepage}
@@ -157,17 +158,26 @@
     \IfEq{\number\numexpr #7 + #8 + #9 }{0}{}{\newpage}
 }
 
+%==================================== Title page imag================
+%* infos : 
+% -"Rapport de projet de fin d’études" : sous titre
+% - titre du projet
+% mon nom
+% fillière
+% Logo école plus nom
+% Date
+% Structure accueil : logo, adresse
+% respos et tuteur de l'école de stage
 
 %!------------------------------------- Header ----------------
 %======================================header========================
-
 %usage : \header[logo left]{Titre}{nom}{prénom}[logo right]
 \newcommandx{\header}[5][1=null,5=null, usedefault]{
 %* ------------------------------ En-tête de pied de page (via fanchdr)------------------------------ %
 %https://tex.stackexchange.com/questions/358329/why-is-rightmark-not-appearing-in-header : pourquoi \rightmark déconne
 \pagestyle{fancy} % Utilise le package fancyhdr, change le style de page pour utiliser celui de fancyheader, et activer les header
 % Header sup
-\fancyhead[L]{\nouppercase{\rightmark}}
+\fancyhead[L]{\nouppercase{\rightmark}\\}
 \fancyhead[C]{#2\\}
 \fancyhead[R]{ #3\\#4}
 \renewcommand{\headrulewidth}{1pt} % épaisseur du trait du header supérieur

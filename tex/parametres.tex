@@ -48,5 +48,10 @@
 \setlength{\parskip}{0.6em}
 \setlength{\footskip}{40 pt}
 %*-------------------------------- Paramètres du sommaire (via tocloft)
-\cftsetindents{section}{1em}{2.5em}
-\cftsetindents{subsection}{4.5em}{2.5em}
+%https://tex.stackexchange.com/questions/53898/how-to-get-lines-with-dots-in-the-table-of-contents-for-sections
+% \makeatletter
+% \renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+% \makeatother
+\cftsetindents{section}{1em}{2em}
+\cftsetindents{subsection}{2em}{2em}
+\cftsetindents{subsubsection}{3em}{2em}

@@ -55,16 +55,7 @@ This package provide a few commands, necessary in order to set a document correc
   * ```#6``` : 1 if table of content, 0 else. (default 1)
   * ```#7``` : 1 if list of figures, 0 else. (default 0)
   * ```#8``` : 1 if list of tables, 0 else. (default 0)
-* ```\titlePageImag```: Provide a full title page (the one provided by ENSIMAG, but with a correct encoding)
-  * ```#1``` : left logo 
-  * ```#2``` : right logo
-  * ```#3``` : fieled of study
-  * ```#4``` : title
-  * ```#5``` : subtitle 
-  * ```#6``` : authors, defined with  ```\listAuteurs``` or ```\enteteAuteurs```.
-  * ```#7``` : 1 if table of content, 0 else. (default 1)
-  * ```#8``` : 1 if list of figures, 0 else. (default 0)
-  * ```#9``` : 1 if list of tables, 0 else. (default 0)
+* ```\titlePageImag```: deprecated, do not use
 All of these commands are provided by the package ```header.sty```.
 ***
 
@@ -74,14 +65,46 @@ However, I signal one that is very usefull for me :
 * the environement ```eq``` : a combination of ```equation*``` and ```aligned```environements, usefull for maths equations.
 
 ***
-## The cls part.
+## The template.cls part.
 As you may know, a cls provide a class file. The difference with a sty file isn't obvious, because everything could be made with a sty. The easiest way to know what is appropriate, is could you use your file with an other document ?If yes, it's a package (sty), if not, (probably because you set your documents settings), it's a class (cls).
 
 This cls provide: 
 * a uge list of packages, almost all with a short description of what they do (contained in ```tex/packages.tex```).
 * some parameters for the document : in ```parametres.tex```. I do not give an exhaustive list of them, because if you need to change them (and able to do it), you should be able to understand the file itself.
-* options for the section appearence : this class provide 3 options for the apparence of the sections names. It is all specified in ```tex/section.tex```. Unless you want to add a setting, or modify the settings, you don't need to understand this file, and in that case, the file is enought explicit.
+* options for the section apparence : this class provide 3 options for the apparence of the sections names. It is all specified in ```tex/section.tex```. Unless you want to add a setting, or modify the settings, you don't need to understand this file, and in that case, the file is enough explicit.
+* 
+***
+## The pfe.cls
+This is an update of the template.cls. It has been built for a PFE report, but is configurable enough to be used in different ways. It works this way : you set all the metadata with all the corresponding methods (in the provided template in the file ```metadata.tex```), and then call the method ```\maketitlepage```to render the title page, and the method ```settables``` to configure the rendered tables. Here the list of the commmands to set the different data.
+* \imageleft{#1} : will add to the left the image with name #1 
+* \imageright{#1}  : will add to the right the image with name #1 
+
+You can set 0, 1, or 2 of this values, and it will show : no image, one image in the middle, or one in left, and the other in right.
+
+* ```\addrentreprise{#1}``` ```#1``` : address (street + number) of the company
+* \auteurlist{#1} ```#1``` : name the the author(s)
+* \entreprise{#1} ```#1``` : name of the company (show : "Effectué chez #1)
+* \filliere{#1} ```#1``` : branch of study
+* \periode{#1} ```#1``` : duration of the internship (dates + duration for instance)
+* \respostage{#1} ```#1``` : internship master in the company
+* \school{#1} ```#1``` : school name
+* \schoolbis{#1} ```#1``` : detailed name of the school (show "Encadrant // #1")
+* \soustitre{#1} ```#1``` : subtitle
+* \titre{#1} ```#1``` : title : MUST be defined, otherwise show a red "title" in the middle
+* \tuteurstage{#1} ```#1``` :responsible in the school (show "Tuteur académique // #1")
+* \villeentreprise{#1} ```#1``` : postal code + city of the company
   
+* \sethidden{#1} ```#1``` : this cls gives 2 options : 
+  * #1 = 1 : all the unsetted fields are hidden (if not needed for instance)
+  * #1 = 0 : show the unsetted fields with their expected value in red, and additionnal content in normal color (ex : "Encadrant"), default value : not hidden
+
+* \booltoc{1} ```#1``` : boolean for table of content
+* \booltof{1} ```#1``` : boolean for table of figures
+* \booltot{1} ```#1``` : boolean for table of tables
+For these 3 function :   
+  * 1 : show the table 
+  * 0 : hide the table, default value
+
 ***
 ## The different extensions
 * .aux : contains data for cross references (for LaTeX and BibTeX)
