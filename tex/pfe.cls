@@ -17,7 +17,7 @@
 %*=================== Redéfinition des styles de chapitres ==============
 \input{section.tex}
 
-\graphicspath{{images/}{~/Library/texmf/tex/images/}}
+\graphicspath{{./images/}{~/Library/texmf/tex/images/}}
 
 %*============================== Page de garde =============================
 % Variables de meta informations
@@ -32,12 +32,12 @@
 \newcommand{\entreprise}[1]{\renewcommand{\givenentreprise}{Effectué chez  #1}}
 \newcommand{\filliere}[1]{\renewcommand{\givenfilliere}{#1}}
 \newcommand{\periode}[1]{\renewcommand{\givenperiode}{#1}}
-\newcommand{\respostage}[1]{\renewcommand{\givenrespostage}{#1}}
+\newcommand{\respostage}[1]{\renewcommand{\givenrespostage}{\textbf{Encadrant} \\  #1}}
 \newcommand{\school}[1]{\renewcommand{\givenschool}{#1}}
 \newcommand{\schoolbis}[1]{\renewcommand{\givenschoolbis}{#1}}
 \newcommand{\soustitre}[1]{\renewcommand{\givensoutitre}{#1}}
 \newcommand{\titre}[1]{\renewcommand{\giventitre}{#1}}
-\newcommand{\tuteurstage}[1]{\renewcommand{\giventuteurstage}{#1}}
+\newcommand{\tuteurstage}[1]{\renewcommand{\giventuteurstage}{\textbf{Tuteur académique} \\ #1}}
 \newcommand{\villeentreprise}[1]{\renewcommand{\givenvilleentreprise}{#1}}
 
 \newcommand{\givenaddrentreprise}{\white{s}}
@@ -53,6 +53,7 @@
 \newcommand{\giventuteurstage}{\white{s}}
 \newcommand{\givenvilleentreprise}{\white{s}}
 
+\newcommand{\hidden}{0} % 1 si les champs non renseignés sont cachés, 0 si indications en rouge
 \newcommand{\sethidden}[1]{
     \renewcommand{\hidden}{#1}
     \IfEq{\hidden}{1}{
@@ -61,12 +62,12 @@
         \renewcommand{\givenentreprise}{\white{s}}
         \renewcommand{\givenfilliere}{\white{s}}
         \renewcommand{\givenperiode}{\white{s}}
-        \renewcommand{\givenrespostage}{undef}
+        \renewcommand{\givenrespostage}{\white{s}}
         \renewcommand{\givenschool}{\white{s}}
         \renewcommand{\givenschoolbis}{\white{s}}
         \renewcommand{\givensoutitre}{\white{s}}
         \renewcommand{\giventitre}{\red{Titre}}
-        \renewcommand{\giventuteurstage}{undef}
+        \renewcommand{\giventuteurstage}{\white{s}}
         \renewcommand{\givenvilleentreprise}{\white{s}}
     }{
         \renewcommand{\givenaddrentreprise}{\red{rue entreprise}}
@@ -74,15 +75,14 @@
         \renewcommand{\givenentreprise}{Effectué chez \red{nom entreprise}}
         \renewcommand{\givenfilliere}{\red{fillière}}
         \renewcommand{\givenperiode}{\red{période du stage}}
-        \renewcommand{\givenrespostage}{\red{responsable de stage}}
+        \renewcommand{\givenrespostage}{ \textbf{Encadrant} \\ \red{responsable de stage}}
         \renewcommand{\givenschool}{\red{nom école/institution}}
         \renewcommand{\givenschoolbis}{\red{suite nom école} }
         \renewcommand{\givensoutitre}{\red{sous titre / nature du rapport}}
-        \renewcommand{\giventuteurstage}{\red{tuteur de stage}}
+        \renewcommand{\giventuteurstage}{\textbf{Tuteur académique} \\ \red{tuteur de stage}}
         \renewcommand{\givenvilleentreprise}{\red{code postal + ville}}
     }
 }
-\newcommand{\hidden}{0} % 1 si les champs non renseignés sont cachés, 0 si indications en rouge
 \sethidden{0}
 
 
@@ -143,7 +143,7 @@
             {\Large \givenauteurlist}\\[.2cm]
             {\large \givenfilliere}\\
         \end{center}
-        %Informations entreprise
+        % %Informations entreprise
         \begin{minipage}{0.47\textwidth}
             \begin{flushleft} \large
                 \textbf{\givenentreprise}\\
@@ -151,17 +151,11 @@
                 \givenvilleentreprise\\
             \end{flushleft}
         \end{minipage}
-        % Informations tuteurs
+        % % Informations tuteurs
         \begin{minipage}{0.47\textwidth}
             \begin{flushright}
-                \IfEq{\givenrespostage}{undef}{}{
-                    \textbf{Encadrant} \\
-                    \givenrespostage\\
-                }
-                \IfEq{\giventuteurstage}{undef}{}{
-                    \textbf{Tuteur académique} \\
-                    \giventuteurstage\\
-                }
+                \givenrespostage\\
+                \giventuteurstage\\
             \end{flushright}
         \end{minipage}\\[0.7cm]
         \begin{center} Version du \today \end{center}
@@ -177,3 +171,5 @@
     \IfEq{\summary}{1}
     {\newpage}{}
 }
+
+%* Inspiration : https://www.overleaf.com/latex/templates/report-cover-page-template/sxzrxsqnqqkr
