@@ -3,6 +3,7 @@
 %pas de couleur (par défaut)
 \definecolor{ColorSection}{rgb}{0,0,0}
 \definecolor{ColorSubSection}{rgb}{0,0,0}
+\definecolor{ColorTodo}{rgb}{1,0,0}
 %
 \renewcommand{\thesection}{\Alph{section}}
 
@@ -66,6 +67,36 @@
     {\underline}
   
 }% Fin sobre
+% Sections avec description
+\newcommand{\setDescriptionSection}[1]{\renewcommand{\descriptionSection}{\textcolor{Silver}{#1}}}
+\newcommand{\descriptionSection}{}
+\newcommandx{\sectionC}[3][2=,3=1 usedefault]{\section{#1}}
+\DeclareOption{dev}{
+    \renewcommandx{\sectionC}[3][2=0, 3=1]{
+        \IfEq{#3}{1}{
+             \titleformat{\section}
+                {\bfseries\Large\scshape\color{ColorTodo}}
+                {\Roman{section}. - todo}
+                {0.5em}
+                {\underline}
+        }{}
+        \IfEq{#2}{}{
+            \section{#1}
+        }
+        {
+            \section{#1 --  [#2] pages}
+        }
+         \IfEq{#3}{1}{
+             \titleformat{\section}
+                {\bfseries\Large\scshape\color{ColorSection}}
+                {\Roman{section}. -}
+                {0.5em}
+                {\underline}
+        }{}
+        \descriptionSection
+        \setDescriptionSection{}
+    }
+}
 %* Indispensable
 \ProcessOptions\relax
 \pgfplotsset{compat=1.16}

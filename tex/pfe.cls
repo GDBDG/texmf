@@ -172,4 +172,15 @@
     {\newpage}{}
 }
 
+%================================== Autres fonctions utiles ============================
+\newcommandx{\userData}[5][1=Prénom 2=nom 3=adresse 4=tel 5=mail]{
+    \begin{array}{cc}
+        \textbf{Nom} & #1 \textsc{#2} \\
+        \textbf{Adresse} & #3\\
+        \textbf{Téléphone} & #4 \\
+        \textbf{Email} & #5 \\
+    \end{array}
+    
+}
+
 %* Inspiration : https://www.overleaf.com/latex/templates/report-cover-page-template/sxzrxsqnqqkr

@@ -17,7 +17,7 @@ If you need to change this options, you can, in the ```tex/template.cls``` file.
 It provide several options (for now, change only the appearance of the sections title):
 * ```colorised``` : add colors to the title (if not, the titles remains black, like the rest of the document)
 * ```sobre``` and ```devie``` : two appearances for the titles (don't use both). (some problems, with the devie option, I recommand the sobre option). Without option, the section titles will have Arabic counter instead of Roman counters.
-
+* ```dev```: usefull with ```sectionC```allow to add descriptions, hidden without this option
 ***
 ## The package header.sty
 This package provide a few commands, necessary in order to set a document correctly. 
@@ -106,6 +106,21 @@ For these 3 function :
   * 1 : show the table 
   * 0 : hide the table, default value
 
+* \sectionC{#1}[#2][#3]
+  * ```#1```: title of the section
+  * ```#2```: number of page to do (default ``` ```), will add the tag ```#2 pages```in the title
+  * ```#3```: default 1 : will change the color of the title in red, and will add a tag todo
+  * Will show the section title, + the variable ```\descriptionSection``` (in light gray) (and reinitialise it after)
+* \setDescriptionSection{#1} : set the variable ```descriptionSection```
+* \descriptionSection : description of the sections, used by ```sectionC```, not part of the report (hidden without the option dev), usefull as a reminder
+
+* \userData{#5}: 
+  * ```#1```: first name
+  * ```#2```: last name
+  * ```#3```: adress
+  * ```#4```:phone
+  * ```#5```:email
+  * Add an array with the personnal data of the person. (Will maybe change to go in the package ``utilitaire```)
 ***
 ## The different extensions
 * .aux : contains data for cross references (for LaTeX and BibTeX)
