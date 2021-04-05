@@ -1,0 +1,12 @@
+\input{section.tex}
+
+\newcommand{\censure}[1]{#1}
+\DeclareOption{censure}{
+    \renewcommand{\censure}[1]{{\huge \textcolor{red}{Passage censuré, en attente de validation}}}
+}
+\DeclareOption{showscensure}{
+    \renewcommand{\censure}[1]{\textcolor{red}{Passage qui doit être autorisé début #1 fin du passage qui doit être autorisé }}
+}
+%* Indispensable
+\ProcessOptions\relax
+\pgfplotsset{compat=1.16}

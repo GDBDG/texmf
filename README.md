@@ -1,138 +1,102 @@
-# texmf
-***
+# La classe pfe
 
 ## Introduction
+Cette classe est une classe héritant de la classe ```article```. Les options utilisées sont :
+* ```12pt``` : taille de police
+* ```a4paper``` : taille de document
+* ```oneside``` : format d'impression (à tester pour le twoside, risque de bugs avec le header)
+*  ```draft``` : option de la classe article, permet d'ajouter les hyphenation (une barre en gras pour indiquer les dépassements de marge)
 
-The ```texmf```directory must be in your ```~\Library\```. It contains a ```tex```directory, tah contains packages that you create, and you want available for all your LaTeX projects. This texmf contains an easy document template to use for article. This project contains also a ```template```directory, it's simply a template of LaTeX file, ot complete.
-***
-## The options for the class.
-This document is set to have the following article options : 
-* 11pt : the size of the police
-* a4paper : the format of impression
-* oneside : format of impression
-* draft : draft mode (Setting the draft option will speed up typesetting, because figures are not loaded, just indicated by a frame. LaTeX will also display hyphenation (Overfull hbox warning) and justification problems with a small black square. Delete the draft option or replace it with final in the final document version.)
+Les aventages de cette classe (et des packages fournis avec) sont des paramétrages faciles concernant les points suivants :
+* La page de garde : grâce à ses variables de contenu (à compléter dans ```metadata.tex```), permet d'avoir une page de garde complète, en une seule ligne dans le document.
+* Les sommaires : en complétant les setters dans ```metadata.tex```, permet d'appeler à la volée les différents sommaires existantes (content, figure, listings, tables).
+* Le header (en tête et pied de page) : simple également, permet d'avoir des headers propres, complets simplement
 
-If you need to change this options, you can, in the ```tex/template.cls``` file.
+## Les options de compilation
+Cette classe rajoute plusieurs options de compilation en plus de celles fournies de base par la classe article.
+* La censure :
+  * Pas d'option : les éléments censurés sont affichés normalement
+  * ```censure``` : cache les passages censurés, en attente de validation
+  * ```showscensure``` : met en évidence les passage censurés (mal géré pour du contenu non textuel, mais compile quand même)
+* Les titres de section :
+  * couleur :
+    * pas d'option : titre en noir
+    * colorised : permet de mettre les titres de section et sous sections en couleur (différentes de bleu)
+  * polices, plus forme
+    * sans option : compteur de section en ```Alph``` souligné
+    * ```devie``` : change la forme des titres se section... (très chargé, pas forcément conseillé)
+    * ```sobre``` : idem, plus léger, option recommandée (section en ```Roman```, sous sections en ```arabic```)
+* le mode dev :
+  * ```dev```: va afficher les description de ```sectionC```(voir plus bas), et le nombre de page attendu dans les titre de section (utiliser uniquement pendant l'élaboration d'un document, à retirer pour un rendu final)
+Il convient de ne pas utiliser plus d'une option par catégorie (compilera, mais résultat non garanti).
 
-It provide several options (for now, change only the appearance of the sections title):
-* ```colorised``` : add colors to the title (if not, the titles remains black, like the rest of the document)
-* ```sobre``` and ```devie``` : two appearances for the titles (don't use both). (some problems, with the devie option, I recommand the sobre option). Without option, the section titles will have Arabic counter instead of Roman counters.
-* ```dev```: usefull with ```sectionC```allow to add descriptions, hidden without this option
-***
-## The package header.sty
-This package provide a few commands, necessary in order to set a document correctly. 
-* ```\auteur{first name}{last name}``` : equivalent to ```first name \textsc{last name}```. It's defined in ```tex/header.sty```. 
-* ```\listAuteurs``` : contains all the authors of the document (must be initialised), the differents authors must be separated only with a ```space```caracter, the ```auteur``` manage the indentation.
-* ```\listEncadrants```: same principe as \listAuteurs, but for the supervisor.
-* ```\auteurs``` (DEPRECATED): define the author part ine the main page. Take several arguments : 
-  * ```#1``` : contains the list of the authors
-  * ```#2``` : contains the list of the supervisors
-  * ```#3``` : 1 if supervisors, 0 else (default 0)
-  * ```#4``` : 1 if only 1 author, 0 else (default 0)
-  * ```#5``` : 1 if full page, 0 else (default 0)
-* ```\enteteAuteurs``` : contains \autheurs data, cf the template, should be use only if there are supersivors, else use ```\listAuteurs``` instead.
-* ```\header```: define the header for all the pages.
-  * ```#1``` : image left below (logo of your school/compagny), optional (defalut value defined in ```tex/header.sty```. )
-  * ```#2``` : the middle title, CAN'T stay empty, or leads to error : ```! LaTeX Error: There's no line here to end.```
-  * ```#3``` : last name (first line up right)
-  * ```#4``` : fisrt name (second line right).
+## La page de garde
+Cette classe fournit une page de garde modulaire (il n'est pas nécessaire d'utiliser tous les champs). Il suffit d'utiliser les setters (se référer à ```metadata.tex```, (est importé dans  ```templatePFE.tex```)).
+Les setters sont définis de la manière suivante : \set _nom_variable_.
+Les variables à setter : 
+* ```hidden```:   
+  * 1 : cache les attributs non renseignés (si pas souhaités) 
+  * 0 : indique en rouges les attributs manquants, et leur position sur le document
 
-* ```\miniTitlePage```: provide a short title page, usefull for medium reports. (for a very small the header contains already all the necessary information).
-  * ```#1``` : fieled of study
-  * ```#2``` : title
-  * ```#3``` : subtitle 
-  * ```#4``` : authors, defined with  ```\listAuteurs``` or ```\enteteAuteurs```.
-  * ```#5``` : 1 if table of content, 0 else. (default 1)
-  * ```#6``` : 1 if list of figures, 0 else. (default 0)
-  * ```#7``` : 1 if list of tables, 0 else. (default 0)
+* Les images en haut : il est possible d'en renseigner aucune, une seule (peut importe laquelle, car sera centrée), ou les deux.
+* ```imageleft``` :  nom de l'image à gauche
+* ```imageright``` :  nom de l'image à droite
 
-* ```\titlepage```: provide a full title page (contains a cover image). Should be used only for important documents.
-  * ```#1``` : cover image (optional)
-  * ```#2``` : fieled of study
-  * ```#3``` : title
-  * ```#4``` : subtitle 
-  * ```#5``` : authors, defined with  ```\listAuteurs``` or ```\enteteAuteurs```.
-  * ```#6``` : 1 if table of content, 0 else. (default 1)
-  * ```#7``` : 1 if list of figures, 0 else. (default 0)
-  * ```#8``` : 1 if list of tables, 0 else. (default 0)
-* ```\titlePageImag```: deprecated, do not use
-All of these commands are provided by the package ```header.sty```.
-***
+* ```addrentreprise``` : adresse de l'entreprise
+* ```auteurlist``` :  auteurs (de la forme auteur \\ auteur...)
+* ```entreprise``` : nom de l'entreprise
+* ```filliere```: fillière 
+* ```periode``` : dates + durée
+* ```respostage```  : maitre de stage dans l'entreprise
+* ```school```  : nom de l'école
+* ```schoolbis``` : acronyme détaillé du nom de l'école
+* ```soustitre``` : (rapport de pfe)
+* ```titre``` : titre du rapport (imposé)(si vous voulez vraiment ne pas en mettre il faut modifier dans ```pfe.cls``` la méthode ```maketitlepage``` : je déconseille d'y toucher sauf si vous savez exactement ce que vous faites)
+* ```tuteurstage``` : tuteur au sein de l'école
+* ```villeentreprise``` : code postal + ville
 
-## The package utilitaire.sty
-Contains a lot of usefull commands, like the operators in maths,... You should take a look,, the name are quit explicit, and the commands not very complicated to understand.
-However, I signal one that is very usefull for me : 
-* the environement ```eq``` : a combination of ```equation*``` and ```aligned```environements, usefull for maths equations.
+Pour afficher la page de garde, il faut utiliser la méthode ```\maketitlepage``` (en début de document).
+## Les sections modifiées
+Cette classe fournit une ```section```améliorée, la ```sectionC``` (va avoir le même comportement qu'une section, car c'est une section enrichie), peut être utilisée avec des section dans le rapport. (une ```sectionC```aura exactement le même comportement qu'une section normale si l'option ```dev```n'est pas utilisée, et les arguments optionnels ne seront pas pris en compte)
+* Usage : ```\sectionC{#1}[#2][#3]```
+  * ```#1```: titre de section (comme pour une section normale)
+  * ```#2```: (optionnel) nombre de page attendu pour la section (sera affiché dans le titre).
+  * ```#3```: 1 : va mettre le titre en rouge, et ajouter la mention ```TODO```
 
-***
-## The template.cls part.
-As you may know, a cls provide a class file. The difference with a sty file isn't obvious, because everything could be made with a sty. The easiest way to know what is appropriate, is could you use your file with an other document ?If yes, it's a package (sty), if not, (probably because you set your documents settings), it's a class (cls).
+* La description de section : sera affichée en gris en dessous de la ```sectionC```, sera affichée si l'option ```dev```est utilisée. Cette variable est comsommée lors de l'appel de ```\sectionC``` (permet de ne pas à avoir à déclarer une description vide pour les ```sectionsC``` suivantes).
+* Usage : ```\setDescriptionSection{#1}``` : va setter la variable ```descriptionSection```, à appeler **AVANT** la section.
+  * ```#1``` : description de section
 
-This cls provide: 
-* a uge list of packages, almost all with a short description of what they do (contained in ```tex/packages.tex```).
-* some parameters for the document : in ```parametres.tex```. I do not give an exhaustive list of them, because if you need to change them (and able to do it), you should be able to understand the file itself.
-* options for the section apparence : this class provide 3 options for the apparence of the sections names. It is all specified in ```tex/section.tex```. Unless you want to add a setting, or modify the settings, you don't need to understand this file, and in that case, the file is enough explicit.
-* 
-***
-## The pfe.cls
-This is an update of the template.cls. It has been built for a PFE report, but is configurable enough to be used in different ways. It works this way : you set all the metadata with all the corresponding methods (in the provided template in the file ```metadata.tex```), and then call the method ```\maketitlepage```to render the title page, and the method ```settables``` to configure the rendered tables. Here the list of the commmands to set the different data.
-* \imageleft{#1} : will add to the left the image with name #1 
-* \imageright{#1}  : will add to the right the image with name #1 
+## La censure
+Utile si vous devez cacher une partie de vos documents, pour censuré un passage il faut utiliser la commande ```\censure{#1}```, tous les éléments censurés se comporteront selon l'option de censure utilisée.
 
-You can set 0, 1, or 2 of this values, and it will show : no image, one image in the middle, or one in left, and the other in right.
+## Glossaire, bibliographie et sommaires
+L'ajout des sommaires se fait avec la methode ```settables``` (à appeler à l'endroit ou vous voulez vos sommaires, recommandé après la page de garde, n'a pas été testé ailleurs). Pour savoir quelles tables afficher, il faut setter à 0 ou 1 les différentes variables d'affichage (via un setter), dans ```metadata.tex```.
 
-* ```\addrentreprise{#1}``` ```#1``` : address (street + number) of the company
-* \auteurlist{#1} ```#1``` : name the the author(s)
-* \entreprise{#1} ```#1``` : name of the company (show : "Effectué chez #1)
-* \filliere{#1} ```#1``` : branch of study
-* \periode{#1} ```#1``` : duration of the internship (dates + duration for instance)
-* \respostage{#1} ```#1``` : internship master in the company
-* \school{#1} ```#1``` : school name
-* \schoolbis{#1} ```#1``` : detailed name of the school (show "Encadrant // #1")
-* \soustitre{#1} ```#1``` : subtitle
-* \titre{#1} ```#1``` : title : MUST be defined, otherwise show a red "title" in the middle
-* \tuteurstage{#1} ```#1``` :responsible in the school (show "Tuteur académique // #1")
-* \villeentreprise{#1} ```#1``` : postal code + city of the company
-  
-* \sethidden{#1} ```#1``` : this cls gives 2 options : 
-  * #1 = 1 : all the unsetted fields are hidden (if not needed for instance)
-  * #1 = 0 : show the unsetted fields with their expected value in red, and additionnal content in normal color (ex : "Encadrant"), default value : not hidden
-  Must be called BEFORE all the setters, or it will overwrite the content (I will provide a fix)
+* booltoc : 1 si sommaire, 0 sinon
+* booltof : 1 si liste des figures 0 sinon
+* booltot : 1 si liste de tables 0 sinon
+* booltol : 1 si liste des listings 0 sinon
 
-* \booltoc{1} ```#1``` : boolean for table of content
-* \booltof{1} ```#1``` : boolean for table of figures
-* \booltot{1} ```#1``` : boolean for table of tables
-For these 3 function :   
-  * 1 : show the table 
-  * 0 : hide the table, default value
+Remarque : certains compilateurs ont des problèmes pour afficher le glosssaire, ce qui peut être corrigé avec le fichier ```.latexmkrc```à ajouter tel quel dans vos projets (attention, si vous avez un glossaire pas appelé, le sera quand même à un endroit non souhaité).
 
-* \sectionC{#1}[#2][#3]
-  * ```#1```: title of the section
-  * ```#2```: number of page to do (default ``` ```), will add the tag ```#2 pages```in the title
-  * ```#3```: default 1 : will change the color of the title in red, and will add a tag todo
-  * Will show the section title, + the variable ```\descriptionSection``` (in light gray) (and reinitialise it after)
-* \setDescriptionSection{#1} : set the variable ```descriptionSection```
-* \descriptionSection : description of the sections, used by ```sectionC```, not part of the report (hidden without the option dev), usefull as a reminder
+## Packages
+### Header.sty
+Ce package permet d'ajouter les headers et pieds de page (voué à disparaitre pour passer via des variables dans le cls).
 
-* \userData{#5}: 
-  * ```#1```: first name
-  * ```#2```: last name
-  * ```#3```: adress
-  * ```#4```:phone
-  * ```#5```:email
-  * Add an array with the personnal data of the person. (Will maybe change to go in the package ``utilitaire```)
-***
-## The different extensions
-* .aux : contains data for cross references (for LaTeX and BibTeX)
-* .bbl : produced by BibTeX, used by LaTeX for the next compilation (contains bibliographie sources)
-* .blg : BibTeX logs
-* .bst : for BibTeX
-* .brf : for back references (I don't know what it is)
-* .dtx : documented source file, generate latex package
-* .fdb_latexmk
-* fls
-* log
-* lof : list of figure
-* out 
-* toc : for the table of content
-* synctex.gz
+Il ne définir aujourd'hui plus que la méthode ```\header```, qui permet de définir les données à ajouter dans les headers, et fait les configurations.
+* Usage : ```\header[#1]{#2}{#3}{#4}[5]```
+  * ```#1```: logo en bas à gauche
+  * ```#2```: titre affiché en haut au milieu
+  * ```#3```: ligne 1 auteur (en haut à droite)
+  * ```#4```: ligne 2 auteur (en haut à droite)
+  * ```#5```: image en bas à droite
+
+### utilitaire.sty
+Contient un certain nombre de méthodes utiles (que je ne définirait pas ici, hormis quelque unes) : 
+* ```\userData[#1][#2][#3][#4][#5]``` : défini un tableau contenant des informations personnelles .
+  * ```#1``` : Prénom
+  * ```#2``` : Nom
+  * ```#3``` : Adresse
+  * ```#4``` : Téléphone
+  * ```#5``` : Mail

@@ -1,12 +1,27 @@
 # The LaTeX files
+*.acn
+*.acr
+*.alg
 *.aux
+*.bbl
+*.bcf
+*.blg
 *.fdb_latexmk
-*.fls 
-*.log 
+*.fls
+*.glg
+*.glo
+*.gls
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
 *.out
-*.synctex.gz 
-*.toc
+*.synctex.gz
 *.pdf
+*.run.xml
+*.synctex.gz
+*.toc
 
 # Mac os files
 .DS_Store

@@ -1,9 +1,9 @@
-%------------------Options des couleurs
-
+% ------------------Options des couleurs
 %pas de couleur (par défaut)
 \definecolor{ColorSection}{rgb}{0,0,0}
 \definecolor{ColorSubSection}{rgb}{0,0,0}
 \definecolor{ColorTodo}{rgb}{1,0,0}
+\definecolor{Description}{rgb}{0.5,0.5,0.5}
 %
 \renewcommand{\thesection}{\Alph{section}}
 
@@ -13,9 +13,7 @@
   \definecolor{ColorSubSection}{rgb}{.31,.506,.741}
 }
 
-
-%------------------Options de mise en page
-%* if no option
+%* Sans option
 \titleformat{\section}
   {\bfseries\Large\color{ColorSection}}
   {\Alph{section}}
@@ -49,7 +47,7 @@
     {0.5em}
     {\underline}
 }
-% Fin option devie
+
 
 %* option : sobre (style plus léger, avec chiffre romains pour les sections)
 \DeclareOption{sobre}{
@@ -66,13 +64,18 @@
     {0.5em}
     {\underline}
   
-}% Fin sobre
-% Sections avec description
-\newcommand{\setDescriptionSection}[1]{\renewcommand{\descriptionSection}{\textcolor{Silver}{#1}}}
+}
+
+%* Sections avec description
+\newcommand{\descriptionRapport}{}
+\newcommand{\setDescriptionRapport}[1]{\renewcommand{\descriptionRapport}{#1}}
+\newcommand{\showDescriptionRapport}{}
+\newcommand{\setDescriptionSection}[1]{\renewcommand{\descriptionSection}{\textcolor{Description}{#1}}}
 \newcommand{\descriptionSection}{}
-\newcommandx{\sectionC}[3][2=,3=1 usedefault]{\section{#1}}
+\newcommandx{\sectionC}[3][2=,3=1]{\section{#1}}
 \DeclareOption{dev}{
-    \renewcommandx{\sectionC}[3][2=0, 3=1]{
+    \renewcommand{\showDescriptionRapport}{\textcolor{Description}{\descriptionRapport}}
+    \renewcommandx{\sectionC}[3][2=,3=1]{
         \IfEq{#3}{1}{
              \titleformat{\section}
                 {\bfseries\Large\scshape\color{ColorTodo}}
@@ -97,6 +100,3 @@
         \setDescriptionSection{}
     }
 }
-%* Indispensable
-\ProcessOptions\relax
-\pgfplotsset{compat=1.16}

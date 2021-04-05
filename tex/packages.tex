@@ -1,10 +1,8 @@
-% *============================== Packages ============================
-% !------------------------------ Les indispensables ------------------
+% !------------------------------ Les indispensables (mise en page) ------------------
 
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amssymb,amsmath} %defini tous les symboles maths http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
 % !------------------------- Les miens -------------------------------
 \usepackage{header} % Mine, utile pour page de garde et header (et rien d'autre)
 \usepackage{utilitaire} % Mine, d&finit un certain nombre de primitive de base
@@ -12,16 +10,19 @@
 %! --------------- Entete et mise en page------------------------------
 \usepackage{titling} % Permet d'accéder à /thetitle, author et date, http://www.ctex.org/documents/packages/layout/titling.pdf
 \usepackage{lastpage}% Pour avoir le nombre de page dans le header https://www.ctan.org/pkg/lastpage
-\usepackage{layout} % donne un gabarit des marges http://web.mit.edu/texsrc/source/latex/layouts/layman.pdf (dispensable pour un doc lambda)
 \usepackage{fancyhdr} % Entete et pied de page https://aurelienpierre.com/wp-content/uploads/fancyhdr_fr.pdf
 \usepackage{geometry} % permet de configurer les marges http://texdoc.net/texmf-dist/doc/latex/geometry/geometry.pdf
 \usepackage{setspace} % permet de changer l'interligne (\begin{onehalfspace} ou {doublespace}) https://ctan.org/tex-archive/macros/latex/contrib/setspace
 \usepackage{xspace} % Permet de mettre des espaces correctement dans des nouvelles commandes avec \xspace
 \usepackage{titlesec} % Permet de bidouiller les titres https://www.ctan.org/pkg/titlesec
-\usepackage{ulem}% Pour les soulignages https://ctan.org/pkg/ulem
-\usepackage{lipsum}% https://ctan.org/pkg/lipsum
+\usepackage{ulem}  % Pour les soulignages https://ctan.org/pkg/ulem
 \usepackage{tocloft} %http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/tocloft/tocloft.pdf pour bidouiller le sommaire
-\usepackage{ifmtarg} % pour gérer les arguments vides de commande https://ctan.org/pkg/ifmtarg
+
+
+
+%! -------------------- Tests gabarits (supprimables)
+\usepackage{layout} % donne un gabarit des marges http://web.mit.edu/texsrc/source/latex/layouts/layman.pdf (dispensable pour un doc lambda)
+\usepackage{lipsum}% https://ctan.org/pkg/lipsum
 
 %! ---------------------Coloration + décors
 
@@ -51,10 +52,10 @@
 \usepackage[]{blkarray} % je sais plus pourquoi je m'en sers  https://www.ctan.org/pkg/blkarray
 %!----------------------------- Les maths de bases
 
+\usepackage{amssymb,amsmath} %defini tous les symboles maths http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
 \usepackage{amsthm} % Utilisé pour les théorèmes http://mirrors.standaloneinstaller.com/ctan/macros/latex/required/amscls/doc/amsthdoc.pdf (doit être appelé après amsmath)
 %\usepackage{amsfonts} % Pour indicatrice https://www.ctan.org/pkg/amsfonts (pas utilisé, à étudier)
 \usepackage{systeme} % Permet de faire des equations simplement http://ctan.tetaneutral.net/macros/generic/systeme/systeme_fr.pdf
-\usepackage{xstring} % Truc obscur de macros http://mirror.ibcp.fr/pub/CTAN/macros/generic/xstring/xstring-fr.pdf %*Utilisé par systeme
 \usepackage{stmaryrd} % ajoute des symboles, dont les brackets (doubles crochets) https://www.ctan.org/pkg/stmaryrd
 \usepackage{verbatim} % Réimplente verbatim, http://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/required/tools/verbatim.pdf %? Sert à quoi exactement ? 
 \usepackage{verbatimbox} % http://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/macros/latex/contrib/verbatimbox/verbatimbox.pdf %? Sert à quoi ????
@@ -66,24 +67,31 @@
 \usepackage{subcaption} % Pour les figures https://ctan.crest.fr/tex-archive/macros/latex/contrib/caption/subcaption.pdf %? Se renseigner
 \usepackage{float} % Sert à la gestion des objets flottants (figures ...), implémente le [H] %https://ctan.crest.fr/tex-archive/macros/latex/contrib/float/float.pdf
 \usepackage{pgf,tikz, pgfplots} %http://cremeronline.com/LaTeX/minimaltikz.pdf (une doc minimale)
-\usetikzlibrary{automata, positioning, arrows} % Pour tracer des automates https://ctan.org/pkg/automata https://notendur.hi.is/aee11/automataLatexGen/
-\usetikzlibrary{matrix} 
-\usetikzlibrary{calc}
-\usetikzlibrary{fit} 
-\usetikzlibrary{arrows}
+    \usetikzlibrary{automata, positioning, arrows} % Pour tracer des automates https://ctan.org/pkg/automata https://notendur.hi.is/aee11/automataLatexGen/
+    \usetikzlibrary{matrix}
+    \usetikzlibrary{calc}
+    \usetikzlibrary{fit}
+    \usetikzlibrary{arrows}
 
-%!---------------------------- Utiles pour le latex
+%!---------------------------- Outils pour création de commande, et références croisées ...
 \usepackage{xargs} % Facilite la vie pour les arguments par défaut https://ctan.org/pkg/xargs
+\usepackage{xstring} % Truc obscur de macros http://mirror.ibcp.fr/pub/CTAN/macros/generic/xstring/xstring-fr.pdf %*Utilisé par systeme
+\usepackage{ifmtarg} % pour gérer les arguments vides de commande https://ctan.org/pkg/ifmtarg
+\usepackage{biblatex} % Pour faire une bibliographie
+\usepackage[nottoc, notlof, notlot]{tocbibind} % pour ajouter biblios... dans le sommaire
 
 %!------------------------------Autres------------------
 \usepackage{eurosym}% permet de définir le symbole euro
 
-%!---------------------------------hyperref (à mettre en dernier)
+%!--------------------------------- Les packages avec ordre important (ne rien mettre après)
 \usepackage{hyperref} % Met des. liens dans un sommaire, doit être le DERNIER DES PACKAGES, compiler 2 fois https://ctan.org/pkg/hyperref
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
+    citecolor=magenta,
 }
 \urlstyle{same}
+
+\usepackage[toc, automake=true, acronym]{glossaries}
