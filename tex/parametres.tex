@@ -38,9 +38,9 @@
     tabsize=2
 }
 
-%* -------------- Paramètres de mise en page  (via layout) ------------ %
+  %* -------------- Paramètres de mise en page  (via layout) ------------ %
 %\pagestyle{fancy}
-%\renewcommand{\sectionmark}[1]% % en conflit avec les modif dans section.tex, avec le package titlesec
+%\renewcommand{\sectionmark}[1]%
 %{\markright{\MakeUppercase{\thesection.\ #1}}}
 \oddsidemargin -14pt
 \evensidemargin -14pt
@@ -48,12 +48,11 @@
 \textheight 22cm
 \setlength{\parskip}{0.6em}
 \setlength{\footskip}{40 pt}
-
 %*-------------------------------- Paramètres du sommaire (via tocloft)
 %https://tex.stackexchange.com/questions/53898/how-to-get-lines-with-dots-in-the-table-of-contents-for-sections
 % \makeatletter
 % \renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
 % \makeatother
-\cftsetindents{section}{1em}{3em}
+\cftsetindents{section}{1em}{2.5em}
 \cftsetindents{subsection}{2em}{3em}
 \cftsetindents{subsubsection}{3em}{3em}

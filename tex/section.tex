@@ -13,7 +13,9 @@
   \definecolor{ColorSubSection}{rgb}{.31,.506,.741}
 }
 
-%* Sans option
+
+%------------------Options de mise en page
+%* if no option
 \titleformat{\section}
   {\bfseries\Large\color{ColorSection}}
   {\Alph{section}}
@@ -47,7 +49,7 @@
     {0.5em}
     {\underline}
 }
-
+% Fin option devie
 
 %* option : sobre (style plus léger, avec chiffre romains pour les sections)
 \DeclareOption{sobre}{
@@ -64,15 +66,14 @@
     {0.5em}
     {\underline}
   
-}
-
-%* Sections avec description
+}% Fin sobre
+% Sections avec description
+\newcommand{\setDescriptionSection}[1]{\renewcommand{\descriptionSection}{\textcolor{Description}{#1}}}
+\newcommand{\descriptionSection}{}
+\newcommandx{\sectionC}[3][2=,3=1]{\newpage \section{#1}}
 \newcommand{\descriptionRapport}{}
 \newcommand{\setDescriptionRapport}[1]{\renewcommand{\descriptionRapport}{#1}}
 \newcommand{\showDescriptionRapport}{}
-\newcommand{\setDescriptionSection}[1]{\renewcommand{\descriptionSection}{\textcolor{Description}{#1}}}
-\newcommand{\descriptionSection}{}
-\newcommandx{\sectionC}[3][2=,3=1]{\section{#1}}
 \DeclareOption{dev}{
     \renewcommand{\showDescriptionRapport}{\textcolor{Description}{\descriptionRapport}}
     \renewcommandx{\sectionC}[3][2=,3=1]{
@@ -84,9 +85,11 @@
                 {\underline}
         }{}
         \IfEq{#2}{}{
+            \newpage
             \section{#1}
         }
         {
+            \newpage
             \section{#1 --  [#2] pages}
         }
          \IfEq{#3}{1}{
@@ -100,3 +103,14 @@
         \setDescriptionSection{}
     }
 }
+
+\newcommand{\censure}[1]{#1}
+\DeclareOption{censure}{
+    \renewcommand{\censure}[1]{{\huge \textcolor{red}{Passage censuré, en attente de validation}}}
+}
+\DeclareOption{showscensure}{
+    \renewcommand{\censure}[1]{\textcolor{red}{Passage qui doit être autorisé début #1 fin du passage qui doit être autorisé }}
+}
+%* Indispensable
+\ProcessOptions\relax
+\pgfplotsset{compat=1.16}
