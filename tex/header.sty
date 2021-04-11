@@ -4,37 +4,34 @@
 \RequirePackage{xargs}
 \RequirePackage{graphicx} % Gestion des arguments par défaut https://ctan.org/pkg/xargs
 
-%===========================Auteur===================================
 %* Sert à définir un auteur ou un encadrant dans un style correct
 %* Usage : \auteur{prénom}{nom}
 \newcommand{\auteur}[2]{#1 \textsc{#2} \\}
-%==============================================================
 
-%=============================gdbdg=================================
 %* Racourci pour mon nom
 \newcommand{\gdbdg}{\auteur{Guillaume}{de Bigault de Granrut}}
-%==============================================================
 
-%!------------------------------------- Header ----------------
-%======================================header========================
-%usage : \header[logo left]{Titre}{nom}{prénom}[logo right]
-\newcommandx{\header}[5][1=null,5=null, usedefault]{
+
+
 %* ------------------------------ En-tête de pied de page (via fanchdr)------------------------------ %
+%usage : \header[logo left]{Titre}{nom}{prénom}[logo right]
 %https://tex.stackexchange.com/questions/358329/why-is-rightmark-not-appearing-in-header : pourquoi \rightmark déconne
+
+\newcommandx{\header}[5][1=null,5=null, usedefault]{
 \pagestyle{fancy} % Utilise le package fancyhdr, change le style de page pour utiliser celui de fancyheader, et activer les header
-% Header sup
-\fancyhead[L]{\nouppercase{\rightmark}}
-\fancyhead[C]{#2\\ \textcolor{white}{e}}
-\fancyhead[R]{ #3\\#4}
-\renewcommand{\headrulewidth}{1pt} % épaisseur du trait du header supérieur
-% Header inf
-\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
-\ifthenelse{\equal{#1}{null}}{}{
-\fancyfoot[L]{\includegraphics[width=1cm]{#1}}
+  % Header sup
+  \fancyhead[L]{\nouppercase{\rightmark}}
+  \fancyhead[C]{#2\\ \textcolor{white}{e}}
+  \fancyhead[R]{ #3\\#4}
+  \renewcommand{\headrulewidth}{1pt} % épaisseur du trait du header supérieur
+  % Header inf
+  \fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+  \ifthenelse{\equal{#1}{null}}{}{
+  \fancyfoot[L]{\includegraphics[width=1cm]{#1}}
+  }
+  \ifthenelse{\equal{#5}{null}}{}{
+    \fancyfoot[R]{\includegraphics[width=1cm]{#5}}
+  }
+  \renewcommand{\footrulewidth}{1pt} % épaisseur du trait du header inférieur
 }
-\ifthenelse{\equal{#5}{null}}{}{
-  \fancyfoot[R]{\includegraphics[width=1cm]{#5}}
-}
-\renewcommand{\footrulewidth}{1pt} % épaisseur du trait du header inférieur
-}
-%==============================================================
+

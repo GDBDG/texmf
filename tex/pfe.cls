@@ -177,15 +177,5 @@
     {\newpage}{}
 }
 
-%================================== Autres fonctions utiles ============================
-\newcommandx{\userData}[5][1=Prénom ,2=nom, 3=adresse, 4=tel, 5=mail, usedefault]{
-    \begin{tabular}{cc}
-        \textbf{Nom} & #1 \textsc{#2} \\
-        \textbf{Adresse} & #3\\
-        \textbf{Téléphone} & #4 \\
-        \textbf{Email} & #5 \\
-    \end{tabular}
-
-}
 
 %https://tex.stackexchange.com/questions/173025/glossary-not-printed-issue-on-sharelatex
