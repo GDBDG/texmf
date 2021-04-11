@@ -9,6 +9,13 @@
 \usepackage{header} % Mine, utile pour page de garde et header (et rien d'autre)
 \usepackage{utilitaire} % Mine, d&finit un certain nombre de primitive de base
 
+%! ---------------------Coloration + décors
+
+\usepackage{fancybox} % Encadrer du texte et autre https://ctan.crest.fr/tex-archive/macros/latex/contrib/fancybox/fancybox-doc.pdf
+\usepackage[tables, svgnames]{xcolor} %!doit être chargé avant les packegs qui import xcolor (ex : pgfgantt) % Donne des couleurs par défaut 
+%\usepackage{color} % pour définir des couleurs http://ctan.tetaneutral.net/macros/latex/required/graphics/color.pdf
+%\usepackage{colortbl} % pour colorer des cases de tableaux
+
 %! --------------- Entete et mise en page------------------------------
 \usepackage{titling} % Permet d'accéder à /thetitle, author et date, http://www.ctex.org/documents/packages/layout/titling.pdf
 \usepackage{lastpage}% Pour avoir le nombre de page dans le header https://www.ctan.org/pkg/lastpage
@@ -26,13 +33,6 @@
 \usepackage{pgfgantt}
 \usepackage[babel=true, kerning=true]{microtype}  %https://tex.stackexchange.com/questions/289852/package-tikz-error-with-pgfgantt (erreurs pgfgantt et babel french, permet de fix
 \usepackage[nottoc, notlof, notlot]{tocbibind}
-
-%! ---------------------Coloration + décors
-
-\usepackage{fancybox} % Encadrer du texte et autre https://ctan.crest.fr/tex-archive/macros/latex/contrib/fancybox/fancybox-doc.pdf
-\usepackage[tables, svgnames]{xcolor}% Donne des couleurs par défaut
-%\usepackage{color} % pour définir des couleurs http://ctan.tetaneutral.net/macros/latex/required/graphics/color.pdf
-%\usepackage{colortbl} % pour colorer des cases de tableaux
 
 %!-------------------------- Ajout d'images 
 
