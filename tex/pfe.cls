@@ -2,8 +2,6 @@
 \NeedsTeXFormat{LaTeX2e}
 % indique le nom du package, et la version
 \ProvidesClass{pfe}[12/02/2012 classe pour rapports avec grande page de garde type pfe]
-% Modifs : mise en page, et utilisation de fichiers auxiliaires pour factoriser un peu
-
 % classe de base, modifiée
 \LoadClass[12pt, a4paper, oneside, draft]{article}
   %book, letter, repport [police, format impression, recto(oneside)/ recto-verso(twoside)]
@@ -16,43 +14,50 @@
 %*=================== Redéfinition des styles de chapitres ==============
 \input{section.tex}
 
-% \graphicspath{{./images/}{~/Library/texmf/tex/images/}}
-
 %*============================== Page de garde =============================
 % Variables de meta informations
-\newcommand{\setimageleft}[1]{\renewcommand{\imageleft}{#1}} % nom de l'image à gauche
-\newcommand{\setimageright}[1]{\renewcommand{\imageright}{#1}}
-
+%* =========================== Images de la page de garde ==================
+% Déclaration des variables
 \newcommand{\imageleft}{undef}
 \newcommand{\imageright}{undef}
 
-\newcommand{\setaddrentreprise}[1]{\renewcommand{\addrentreprise}{#1}}
-\newcommand{\setauteurlist}[1]{\renewcommand{\auteurlist}{#1}}
-\newcommand{\setentreprise}[1]{\renewcommand{\entreprise}{Effectué chez  #1}}
-\newcommand{\setfilliere}[1]{\renewcommand{\filliere}{#1}}
-\newcommand{\setperiode}[1]{\renewcommand{\periode}{#1}}
-\newcommand{\setrespostage}[1]{\renewcommand{\respostage}{\textbf{Encadrant} \\  #1}}
-\newcommand{\setschool}[1]{\renewcommand{\school}{#1}}
-\newcommand{\setschoolbis}[1]{\renewcommand{\schoolbis}{#1}}
-\newcommand{\setsoustitre}[1]{\renewcommand{\soutitre}{#1}}
-\newcommand{\settitre}[1]{\renewcommand{\titre}{#1}}
-\newcommand{\settuteurstage}[1]{\renewcommand{\tuteurstage}{\textbf{Tuteur académique} \\ #1}}
-\newcommand{\setvilleentreprise}[1]{\renewcommand{\villeentreprise}{#1}}
+% Déclaratoin des setters
+\newcommand{\setimageleft}[1]{\renewcommand{\imageleft}{#1}} % nom de l'image à gauche
+\newcommand{\setimageright}[1]{\renewcommand{\imageright}{#1}}
 
-\newcommand{\addrentreprise}{\white{s}}
-\newcommand{\auteurlist}{\white{s}}
-\newcommand{\entreprise}{\white{s}}
-\newcommand{\filliere}{\white{s}}
-\newcommand{\periode}{\white{s}}
-\newcommand{\respostage}{\white{s}}
-\newcommand{\school}{\white{s}}
-\newcommand{\schoolbis}{\white{s}}
-\newcommand{\soutitre}{\white{s}}
+
+
+% Déclaration des variables de la page de garde
+\newcommand{\addrentreprise}{\red{rue entreprise}}
+\newcommand{\auteurlist}{\red{auteur}}
+\newcommand{\entreprise}{Effectué chez \red{nom entreprise}}
+\newcommand{\filliere}{\red{fillière}}
+\newcommand{\periode}{\red{période du stage}}
+\newcommand{\respostage}{ \textbf{Encadrant} \\ \red{responsable de stage}}
+\newcommand{\school}{\red{nom école/institution}}
+\newcommand{\schoolbis}{\red{suite nom école} }
 \newcommand{\titre}{\red{Titre}}
-\newcommand{\tuteurstage}{\white{s}}
-\newcommand{\villeentreprise}{\white{s}}
+\newcommand{\soutitre}{\red{sous titre / nature du rapport}}
+\newcommand{\tuteurstage}{\textbf{Tuteur académique} \\ \red{tuteur de stage}}
+\newcommand{\villeentreprise}{\red{code postal + ville}}
 
-\newcommand{\hidden}{0} % 1 si les champs non renseignés sont cachés, 0 si indications en rouge
+% Déclaration des setters des variables de la page de garde
+\newcommand{\setaddrentreprise}[1]{\renewcommand{\addrentreprise}{\IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setauteurlist}[1]{\renewcommand{\auteurlist}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setentreprise}[1]{\renewcommand{\entreprise}{Effectué chez  #1}}
+\newcommand{\setfilliere}[1]{\renewcommand{\filliere}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setperiode}[1]{\renewcommand{\periode}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setrespostage}[1]{\renewcommand{\respostage}{\textbf{Encadrant} \\  #1}}
+\newcommand{\setschool}[1]{\renewcommand{\school}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setschoolbis}[1]{\renewcommand{\schoolbis}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setsoustitre}[1]{\renewcommand{\soutitre}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\settitre}[1]{\renewcommand{\titre}{\IfEq{#1}{}{\red{Titre}}{#1}}}
+\newcommand{\settuteurstage}[1]{\renewcommand{\tuteurstage}{\textbf{Tuteur académique} \\ #1}}
+\newcommand{\setvilleentreprise}[1]{\renewcommand{\villeentreprise}{IfEq{#1}{}{\white{s}}{#1}}}
+
+%* Hidden : 0, cache les attributs non renseignés, 1 : affiche en rouge les attributs non renseignés
+% Déclaration de la variable hidden, par défaut 0
+\newcommand{\hidden}{0}
 \newcommand{\sethidden}[1]{
     \renewcommand{\hidden}{#1}
     \IfEq{\hidden}{1}{
@@ -69,17 +74,7 @@
         \renewcommand{\tuteurstage}{\white{s}}
         \renewcommand{\villeentreprise}{\white{s}}
     }{
-        \renewcommand{\addrentreprise}{\red{rue entreprise}}
-        \renewcommand{\auteurlist}{\red{auteur}}
-        \renewcommand{\entreprise}{Effectué chez \red{nom entreprise}}
-        \renewcommand{\filliere}{\red{fillière}}
-        \renewcommand{\periode}{\red{période du stage}}
-        \renewcommand{\respostage}{ \textbf{Encadrant} \\ \red{responsable de stage}}
-        \renewcommand{\school}{\red{nom école/institution}}
-        \renewcommand{\schoolbis}{\red{suite nom école} }
-        \renewcommand{\soutitre}{\red{sous titre / nature du rapport}}
-        \renewcommand{\tuteurstage}{\textbf{Tuteur académique} \\ \red{tuteur de stage}}
-        \renewcommand{\villeentreprise}{\red{code postal + ville}}
+
     }
 }
 \sethidden{0}
