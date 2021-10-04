@@ -33,7 +33,7 @@
 \newcommand{\entreprise}{Effectué chez \red{nom entreprise}}
 \newcommand{\filliere}{\red{fillière}}
 \newcommand{\periode}{\red{période du stage}}
-\newcommand{\respostage}{ \textbf{Encadrant} \\ \red{responsable de stage}}
+\newcommand{\respostage}{\textbf{Encadrant} \\ \red{responsable de stage}}
 \newcommand{\school}{\red{nom école/institution}}
 \newcommand{\schoolbis}{\red{suite nom école} }
 \newcommand{\titre}{\red{Titre}}
@@ -42,18 +42,18 @@
 \newcommand{\villeentreprise}{\red{code postal + ville}}
 
 % Déclaration des setters des variables de la page de garde
-\newcommand{\setaddrentreprise}[1]{\renewcommand{\addrentreprise}{\IfEq{#1}{}{\white{s}}{#1}}}
-\newcommand{\setauteurlist}[1]{\renewcommand{\auteurlist}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setaddrentreprise}[1]{\renewcommand{\addrentreprise}{#1}}
+\newcommand{\setauteurlist}[1]{\renewcommand{\auteurlist}{#1}}
 \newcommand{\setentreprise}[1]{\renewcommand{\entreprise}{Effectué chez  #1}}
-\newcommand{\setfilliere}[1]{\renewcommand{\filliere}{IfEq{#1}{}{\white{s}}{#1}}}
-\newcommand{\setperiode}[1]{\renewcommand{\periode}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setfilliere}[1]{\renewcommand{\filliere}{#1}}
+\newcommand{\setperiode}[1]{\renewcommand{\periode}{#1}}
 \newcommand{\setrespostage}[1]{\renewcommand{\respostage}{\textbf{Encadrant} \\  #1}}
-\newcommand{\setschool}[1]{\renewcommand{\school}{IfEq{#1}{}{\white{s}}{#1}}}
-\newcommand{\setschoolbis}[1]{\renewcommand{\schoolbis}{IfEq{#1}{}{\white{s}}{#1}}}
-\newcommand{\setsoustitre}[1]{\renewcommand{\soutitre}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setschool}[1]{\renewcommand{\school}{#1}}
+\newcommand{\setschoolbis}[1]{\renewcommand{\schoolbis}{#1}}
+\newcommand{\setsoustitre}[1]{\renewcommand{\soutitre}{#1}}
 \newcommand{\settitre}[1]{\renewcommand{\titre}{\IfEq{#1}{}{\red{Titre}}{#1}}}
 \newcommand{\settuteurstage}[1]{\renewcommand{\tuteurstage}{\textbf{Tuteur académique} \\ #1}}
-\newcommand{\setvilleentreprise}[1]{\renewcommand{\villeentreprise}{IfEq{#1}{}{\white{s}}{#1}}}
+\newcommand{\setvilleentreprise}[1]{\renewcommand{\villeentreprise}{#1}}
 
 %* Hidden : 0, cache les attributs non renseignés, 1 : affiche en rouge les attributs non renseignés
 % Déclaration de la variable hidden, par défaut 0
@@ -74,7 +74,18 @@
         \renewcommand{\tuteurstage}{\white{s}}
         \renewcommand{\villeentreprise}{\white{s}}
     }{
-
+        \renewcommand{\addrentreprise}{\red{rue entreprise}}
+        \renewcommand{\auteurlist}{\red{auteur}}
+        \renewcommand{\entreprise}{Effectué chez \red{nom entreprise}}
+        \renewcommand{\filliere}{\red{fillière}}
+        \renewcommand{\periode}{\red{période du stage}}
+        \renewcommand{\respostage}{ \textbf{Encadrant} \\ \red{responsable de stage}}
+        \renewcommand{\school}{\red{nom école/institution}}
+        \renewcommand{\schoolbis}{\red{suite nom école} }
+        \renewcommand{\titre}{\red{Titre}}
+        \renewcommand{\soutitre}{\red{sous titre / nature du rapport}}
+        \renewcommand{\tuteurstage}{\textbf{Tuteur académique} \\ \red{tuteur de stage}}
+        \renewcommand{\villeentreprise}{\red{code postal + ville}}
     }
 }
 \sethidden{0}
@@ -98,14 +109,14 @@
         \IfEq{\imageleft}{undef}{
             \IfEq{\imageright}{undef}{}{
                 \begin{center}
-                    \includegraphics[width=0.5\textwidth]{\imageright}\\[.5cm]
+                    \includegraphics[width=0.4\textwidth]{\imageright}\\[.5cm]
                 \end{center}
             }
         }
         {
             \IfEq{\imageright}{undef}{
                 \begin{center}
-                    \includegraphics[width=0.5\textwidth]{\imageleft}\\[.5cm]
+                    \includegraphics[width=0.4\textwidth]{\imageleft}\\[.5cm]
                 \end{center}
             }
             {
